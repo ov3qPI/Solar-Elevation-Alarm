@@ -1,5 +1,5 @@
 Solar Elevation Alarm v20261022T151029Z — playback reliability regression tests
-1. Install over the existing v0.5 APK, without uninstalling, and verify both saved events and the downloaded DE440s kernel remain intact.
+1. Install over the existing v20261022T031609Z APK, without uninstalling, and verify both saved events and the downloaded DE440s kernel remain intact.
 2. Press START on a long WV event; verify audio and its single Stop media notification appear.
 3. While WV is running, arrange for the short OGG event to fire as an actual scheduled solar alarm. Its sound must interrupt WV and play audibly; the prior WV stream must not resume automatically.
 4. In Diagnostics, inspect the short event's Last playback result; it must not say Suppressed: playback already active. Confirm Playback origin changes to scheduled alarm while the alarm plays.
