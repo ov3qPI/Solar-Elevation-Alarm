@@ -1,0 +1,11 @@
+Solar Elevation Alarm v20261022T151029Z — playback reliability regression tests
+1. Install over the existing v0.5 APK, without uninstalling, and verify both saved events and the downloaded DE440s kernel remain intact.
+2. Press START on a long WV event; verify audio and its single Stop media notification appear.
+3. While WV is running, arrange for the short OGG event to fire as an actual scheduled solar alarm. Its sound must interrupt WV and play audibly; the prior WV stream must not resume automatically.
+4. In Diagnostics, inspect the short event's Last playback result; it must not say Suppressed: playback already active. Confirm Playback origin changes to scheduled alarm while the alarm plays.
+5. During an active scheduled alarm, tap START on another card; this must not cut off the scheduled alarm.
+6. Start WV manually, restart the phone, then reopen the app; no Stop Playback button should be shown without an actual playing media notification.
+7. After reboot, verify armed events have upcoming dates; verify an overnight real scheduled alarm still wakes the phone and plays audio.
+8. While a new alarm is playing after preemption, an old notification Stop action must not stop that replacement audio.
+The above scenarios require real on-device testing. Source-level validation and shell syntax checks alone do not establish Android runtime behavior.
+The published GitHub release v20261022T031609Z remains the previous proven baseline until this candidate passes.

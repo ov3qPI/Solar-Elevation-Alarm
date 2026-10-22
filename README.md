@@ -1,4 +1,6 @@
 # Solar Elevation Alarm
+**Source status:** `main` includes the unreleased v0.6 playback-safety repair (`v20261022T151029Z`); [v0.5 remains the latest published signed APK](https://github.com/ov3qPI/Solar-Elevation-Alarm/releases/tag/v20261022T031609Z). The reboot/stale-Stop-button test passed on the development phone; scheduled alarms interrupting an active manual audition have not yet been retested on-device.
+**Known v0.5 issue:** When an alarm triggers during another playback session, the incoming alarm can be suppressed. Until v0.6 is validated and released, avoid manual auditions that overlap armed alarms and retain a backup alarm.
 A native Android alarm clock that triggers long-form audio when the Sun crosses a chosen **geometric solar-center elevation angle** at your location. Built on-device in [Termux](https://termux.dev/) with a deliberately simple **pure black (`#000000`) / pure red (`#FF0000`)** interface.
 **First tested release:** `v20261022T031609Z` · Android 12+ (API 31+) · ARM64 (`arm64-v8a`) · Field-tested on a Samsung Galaxy XCover6 Pro (Android SDK 36).
 ## Download and install
@@ -45,8 +47,8 @@ cd "$HOME"
 git clone https://github.com/ov3qPI/Solar-Elevation-Alarm.git
 cd Solar-Elevation-Alarm
 for type in java c xml sh md txt; do mkdir -p "/storage/emulated/0/Documents/$type"; cp -f "Documents/$type/"* "/storage/emulated/0/Documents/$type/"; done
-bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261022T031609Z.sh --preflight
-bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261022T031609Z.sh --install
+bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261022T151029Z.sh --preflight
+bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261022T151029Z.sh --install
 ```
 The builder fetches WavPack 5.8.1 at pinned revision `4827b98`, compiles JNI for ARM64, and produces a signed APK in `Documents/apk`, logs in `Documents/log`, and a checksum in `Documents/txt`. It creates a local signing keystore in `$HOME/.solar_elevation_alarm_build`; **keep that keystore and its password private and backed up**. Never commit keystores, signing secrets, copied diagnostics, user audio libraries, or private GPS traces.
 ## Licenses
