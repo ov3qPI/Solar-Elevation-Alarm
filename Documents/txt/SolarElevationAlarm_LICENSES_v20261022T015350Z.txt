@@ -1,0 +1,5 @@
+Solar Elevation Alarm native Android application source: CC0-1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/legalcode
+SPDX-License-Identifier: CC0-1.0
+WavPack 5.8.1 library: copyright David Bryant and contributors, BSD-3-Clause, https://github.com/dbry/WavPack/blob/5.8.1/license.txt
+The Termux build fetches official WavPack source, retains its license.txt, compiles it into the APK, and packages an exact copy of that upstream license at assets/wavpack_license.txt. This third-party library is not CC0.
+DE440s kernel: independently downloaded by the application from NASA NAIF, stored in app-private data and not bundled into the APK or source package.

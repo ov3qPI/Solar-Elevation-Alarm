@@ -1,0 +1,4 @@
+# Third-party components
+**WavPack 5.8.1:** Copyright David Bryant and contributors, BSD-3-Clause, upstream https://github.com/dbry/WavPack/tree/5.8.1 and full license https://github.com/dbry/WavPack/blob/5.8.1/license.txt. The Termux builder downloads and verifies pinned WavPack source (`4827b98`), then includes the exact upstream license in the compiled APK. This third-party code is **not CC0**.
+**JPL DE440s:** High-accuracy ephemeris supplied separately by NASA NAIF at https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp. The app downloads the file on first use, verifies its hash and keeps it locally. No DE440s file is redistributed in this repository or the APK.
+**Android platform APIs:** Provided by the Android system. The project's standalone APK is created using Termux tools. Build tools and the Android SDK retain their respective upstream licenses.
