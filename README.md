@@ -4,6 +4,7 @@
 **Known issue in `v20261022T031609Z`:** When an alarm triggers during another playback session, the incoming alarm can be suppressed. Until the overlap repair in `v20261022T151029Z` is validated, avoid manual auditions that overlap armed alarms and retain a backup alarm.
 A native Android alarm clock that triggers long-form audio when the Sun crosses a chosen **geometric solar-center elevation angle** at your location. Built on-device in [Termux](https://termux.dev/) with a deliberately simple **pure black (`#000000`) / pure red (`#FF0000`)** interface.
 **First tested release:** `v20261022T031609Z` · Android 12+ (API 31+) · ARM64 (`arm64-v8a`) · Field-tested on a Samsung Galaxy XCover6 Pro (Android SDK 36).
+**Connected Audio Only test branch (`v20261105T212400Z`):** Long-press the red headphones icon to toggle restricted playback. When enabled, MediaPlayer and WavPack audio begin muted and are unmuted only after Android 16 (API 36) confirms every routed output is an eligible wired, USB or Bluetooth device. Unexpected routing and device disconnection stop playback; failures are recorded in diagnostics. On older Android versions, restricted playback is intentionally blocked rather than risk the built-in speaker. This is not a guarantee against momentary hardware/OS routing glitches and requires on-device validation.
 ## Download and install
 **[Download the latest signed APK from GitHub Releases](https://github.com/ov3qPI/Solar-Elevation-Alarm/releases/latest)**. For the first field-tested build, see **[v20261022T031609Z](https://github.com/ov3qPI/Solar-Elevation-Alarm/releases/tag/v20261022T031609Z)**.
 1. Download the `.apk` asset and the accompanying SHA-256 text file. Verify the APK before installation; in Termux, run `sha256sum /path/to/downloaded.apk` and compare its hash against the published checksum.
@@ -16,7 +17,7 @@ A native Android alarm clock that triggers long-form audio when the Sun crosses 
 ## What it does
 - Calculates rising and setting crossings for arbitrary signed decimal elevation angles using a local downloaded JPL DE440s ephemeris.
 - Schedules one-shot Android alarm-clock events and automatically calculates the next valid crossing after delivery.
-- Plays selected local audio through the phone's standard media audio routing, including Bluetooth. Supports WavPack (`.wv`) through bundled native WavPack 5.8.1, plus WAV and formats supported by Android's media decoders.
+- Plays selected local audio through the phone's standard media audio routing, including Bluetooth. Supports WavPack (`.wv`) through bundled native WavPack 5.8.1, plus WAV and formats supported by Android's media decoders. The development branch adds optional Connected Audio Only with a long-press headphones control.
 - Offers a minimal terminal **STOP** control, not a seeking interface or playlist. Long-form audio continues playing if the app is swiped out of the Recents overview.
 - Maintains last-known position and requests best-effort background location updates around every 24 hours, rescheduling enabled events when a changed position is accepted.
 - Lists events in solar traversal order (ascending from low to high angles, then descending from high to low) rather than chronological order; events configured for Both sort by their next resolved direction.
@@ -48,8 +49,8 @@ cd "$HOME"
 git clone https://github.com/ov3qPI/Solar-Elevation-Alarm.git
 cd Solar-Elevation-Alarm
 for type in java c xml sh md txt; do mkdir -p "/storage/emulated/0/Documents/$type"; cp -f "Documents/$type/"* "/storage/emulated/0/Documents/$type/"; done
-bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261025T010732Z.sh --preflight
-bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261025T010732Z.sh --install
+bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261105T212400Z.sh --preflight
+bash /storage/emulated/0/Documents/sh/SolarElevationAlarm_build_v20261105T212400Z.sh --install
 ```
 The new build script opens Android's installer when run with `--install` and removes temporary build intermediates while retaining signed APK, log, checksum and keystore. The builder fetches WavPack 5.8.1 at pinned revision `4827b98`, compiles JNI for ARM64, and produces a signed APK in `Documents/apk`, logs in `Documents/log`, and a checksum in `Documents/txt`. It creates a local signing keystore in `$HOME/.solar_elevation_alarm_build`; **keep that keystore and its password private and backed up**. Never commit keystores, signing secrets, copied diagnostics, user audio libraries, or private GPS traces.
 ## Licenses
